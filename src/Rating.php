@@ -46,7 +46,7 @@ class Rating extends Model
      *
      * @param Model $author
      * @param string $body
-     * @return bool
+     * @return Comment
      */
     public function createComment(Model $author, string $body)
     {
