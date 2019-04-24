@@ -1,0 +1,35 @@
+{
+    "name": "agilepixels/laravel-rateable",
+    "description": "A package to add ratings to Eloquent Models",
+    "keywords": [
+        "agilepixels",
+        "laravel-rateable"
+    ],
+    "homepage": "https://github.com/agilepixels/laravel-rateable",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Lex de Willigen",
+            "email": "lex@agilepixels.com",
+            "homepage": "https://agilepixels.com",
+            "role": "Developer"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "agilepixels/laravel-commentable": "^1.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "AgilePixels\\Rateable\\": "src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "AgilePixels\\Rateable\\RateableServiceProvider"
+            ]
+        }
+    }
+}
