@@ -8,7 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Rating extends Model
 {
+    protected $connection;
 
+    public function __construct()
+    {
+        $this->connection = config('rateable.database');
+    }
+    
     use HasComments;
 
     /**
