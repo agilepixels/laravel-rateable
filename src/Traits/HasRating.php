@@ -56,4 +56,19 @@ trait HasRating
 
         return $rate;
     }
+
+    /**
+     * Get a rating for this model
+     *
+     * @param Model $author
+     * @return Rating
+     * @throws InvalidRating
+     */
+    public function getRating(Model $author)
+    {
+        $rate = Rating::where(['rateable_type' => get_class($this), 'rateable_id' => $this->id, 'author_id' => $author->id])->first();
+        if (!empty($rate->rating)) return $rate->rating;
+
+        return $rate;
+    }
 }
