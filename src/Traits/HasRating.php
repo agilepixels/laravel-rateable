@@ -39,16 +39,21 @@ trait HasRating
             throw InvalidRating::notInRange($rating);
         }
 
-        $rating = new Rating(['rating' => $rating]);
-        $rating->author()->associate($author);
-        $rating->rateable()->associate($this);
-        $rating->save();
+        $rate = Rating::where(['rateable_type' => get_class($this), 'rateable_id' => $this->id, 'author_id' => $author->id])->first();
 
-        if ($body) {
-            $rating->createComment($author, $body);
+        if (empty($rate)) {
+            $rate = new Rating(['rating' => $rating]);
+            $rate->author()->associate($author);
+            $rate->rateable()->associate($this);
         }
 
-        return $rating;
-    }
+        $rate->rating = $rating;
+        $rate->save();
 
+        if ($body) {
+            $rate->createComment($author, $body);
+        }
+
+        return $rate;
+    }
 }
