@@ -1,3 +1,8 @@
+While waiting for pull requests into the main repo,
+
+- continuing development of the package as it suites my needs better than the others i found.
+- using https://github.com/gjunge/rateit.js on the front end
+
 # Add ratings to Eloquent Models
 
 [![Latest Version on Packagist](https://img.shields.io/badge/packagist-1.0.0-blue.svg?style=flat-square)](https://packagist.org/packages/agilepixels/laravel-rateable)
@@ -36,6 +41,7 @@ php artisan migrate
 ```
 
 A config file is included to specify the range for the ratings. By default, rating are between 0 and 5. However, you are free to use it otherwise. For instance, ratings like +1 or -1. You can publish the config-file with:
+
 ```bash
 php artisan vendor:publish --provider="AgilePixels\Rateable\RateableServiceProvider" --tag="config"
 ```
@@ -77,29 +83,39 @@ class User extends Model
 ## Usage
 
 ### The createRating Method
+
 To create a rating for a model that `HasRatings`, you can use the `creatRating()` method. The method takes two variables: `$rating` and `$author`. The `$rating` can be an integer or a float within the range defined in your config file (default is 0 to 5). The `$author` refers to the model that `AddsRatings` which, in most cases, is your User model.
+
 ```php
 $product->createRating($rating, $author)
 ```
-Optionally, you can also post a comment for a rating. This can be done through a third string variable called `$body`. 
+
+Optionally, you can also post a comment for a rating. This can be done through a third string variable called `$body`.
+
 ```php
 $product->createRating($rating, $author, $body)
 ```
 
 ### The createComment Method
+
 Once a rating is created, you might want to respond to the rating as owner of the web application. This can be done using the `createComment()` method. The method takes two variables: `$author` and `$body`.
+
 ```php
 $rating->createComment($author, $body)
 ```
 
 ### Calculations
+
 Of course, you may want to display some data about the models ratings. This package provides three methods to do so:
+
 ```php
 $product->averageRating();
 $product->averageRatingAsPercentage();
 $product->sumRating();
 ```
+
 The data is also available as [accessor](https://laravel.com/docs/5.7/eloquent-mutators#defining-an-accessor). You may access the data like this:
+
 ```php
 $product->average_rating
 $product->average_rating_as_percentage
@@ -113,4 +129,3 @@ $product->sum_rating
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
-
