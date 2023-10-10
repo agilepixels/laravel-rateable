@@ -71,4 +71,31 @@ trait HasRating
 
         return $rate;
     }
+
+
+    /**
+     * Remove a new rating for this model
+     *
+     * @param int $rating
+     * @param Model $author
+     * @param string|null $body
+     * @return Rating
+     * @throws InvalidRating
+     */
+    public function removeRating(int $rating, Model $author)
+    {
+        if ($rating != 0) {
+            throw InvalidRating::notInRange($rating);
+        }
+
+        $rate = Rating::where(['rateable_type' => get_class($this), 'rateable_id' => $this->id, 'author_id' => $author->id])->first();
+
+        if (!empty($rate)) {
+            $rate->delete();
+        }
+
+        // TODO remove comment
+
+        return $rate;
+    }
 }
